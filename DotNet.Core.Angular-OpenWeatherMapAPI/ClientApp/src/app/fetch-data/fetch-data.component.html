@@ -1,0 +1,41 @@
+<h1 id="tableLabel">Current Weather</h1>
+
+<p>This component fetches data from <a href="https://openweathermap.org/current">Open Weather Map site</a></p>
+
+<p *ngIf="resError" class="bg-danger bg-gradient text-white"><em>{{resError}}</em></p>
+<div class="row">
+  <div class="col">
+    <input type="text" class="form-control" [(ngModel)]="apiKey" placeholder="Enter API Key" aria-label="API Key" required>
+  </div>
+  <div class="col">
+    <input type="text" class="form-control" [(ngModel)]="enteredCity" placeholder="Enter City" aria-label="City" required>
+  </div>
+</div>
+<br>
+<div class="btn-group" role="group" aria-label="Get Current Weather Buttons">
+  <input type="button" class="btn btn-outline-primary" value="Get Current Weather(JSON)" (click)="getCurrentWeather(apiKey,enteredCity,'json')" />
+  <input type="button" class="btn btn-outline-primary" value="Get Current Weather(XML)" (click)="getCurrentWeather(apiKey,enteredCity,'xml')" />
+</div>
+<br>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="weather">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Main</th>
+      <th>Description</th>
+      <th>Temp. (C)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ weather.date | date:'shortDate'}}</td>
+      <td>{{ weather.countryName }}</td>
+      <td>{{ weather.cityName }}</td>
+      <td>{{ weather.main }}</td>
+      <td>{{ weather.description }}</td>
+      <td>{{ weather.temp }}</td>
+    </tr>
+  </tbody>
+</table>
